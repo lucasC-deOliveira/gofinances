@@ -1,10 +1,22 @@
 import React from "react";
-import { Text} from "react-native";
-import { Container, Title } from "./styles"
+import { Text, View } from "react-native";
+import { Container, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName } from "./styles"
 export function Dashboard() {
   return (
     <Container>
-      <Title>Dashboard</Title>
+      <Header>
+        
+        <UserWrapper>
+          <UserInfo>
+            <Photo source={{ uri: "https://github.com/lucasC-deOliveira.png" }} />
+            <User>
+              <UserGreeting>Ola,</UserGreeting>
+              <UserName>Lucas</UserName>
+            </User>
+          </UserInfo>
+        </UserWrapper>
+
+      </Header>
     </Container>
   )
 }
