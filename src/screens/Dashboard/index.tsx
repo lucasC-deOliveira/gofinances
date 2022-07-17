@@ -1,7 +1,8 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { HighLightCard } from "../../components/HilightCard";
-import { Icon, Container, HighLightCards, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName } from "./styles"
+import { TransactionCard } from "../TransactionCard";
+import { Icon, Transactions, Title, Container, HighLightCards, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName } from "./styles"
 
 export function Dashboard() {
   return (
@@ -37,9 +38,15 @@ export function Dashboard() {
           title="Total"
           amount="R$ 16.141,00"
           lastTransaction="01 a 17 de julho de 2022"
-         type="total"
-       />
+          type="total"
+        />
       </HighLightCards >
+      <Transactions>
+        <Title>
+          Listagem
+        </Title>
+        <TransactionCard/>
+      </Transactions>
     </Container>
   )
 }
