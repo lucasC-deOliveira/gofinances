@@ -82,3 +82,4 @@ font-family: ${({ theme }) => theme.fonts.regular};
 margin-bottom: 16px;
 
 `
+export const TransactionList = styled.FlatList``
