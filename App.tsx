@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Dashboard } from './src/screens';
+import { Dashboard } from './src/screens/Dashboard';
 import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading';
 

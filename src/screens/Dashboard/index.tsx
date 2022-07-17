@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { HighLightCard } from "../components/HilightCard";
+import { HighLightCard } from "../../components/HilightCard";
 import { Icon, Container, HighLightCards, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName } from "./styles"
 
 export function Dashboard() {
