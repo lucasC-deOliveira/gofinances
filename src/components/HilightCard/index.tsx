@@ -6,7 +6,7 @@ import {
   Title,
   Footer,
   Amount,
-  LastTrasaction,
+  LastTransaction,
   Icon 
 
 } from "./styles";
@@ -21,7 +21,7 @@ export function HighLightCard() {
       </Header>
       <Footer>
         <Amount>R$ 17.400,00</Amount>
-        <LastTrasaction>Última entrada dia 17 de Julho de 2022</LastTrasaction>
+        <LastTransaction>Última entrada dia 17 de Julho de 2022</LastTransaction>
       </Footer>
     </Container>
   )
