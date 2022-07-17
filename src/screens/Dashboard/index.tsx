@@ -1,6 +1,6 @@
 import React from "react";
 import { HighLightCard } from "../../components/HilightCard";
-import { TransactionCard, TransactionCardProps } from "../TransactionCard";
+import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
 import { Icon, Transactions, Title, Container, HighLightCards, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName, TransactionList } from "./styles"
 
 
