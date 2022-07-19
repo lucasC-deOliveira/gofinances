@@ -13,6 +13,14 @@ import {
   TransactionsTypes
 } from './styles'
 import { CategorySelect } from '../CategorySelect'
+import { InputForm } from '../../components/Forms/InputForm'
+import { useForm } from 'react-hook-form'
+
+interface FormData {
+  name: string;
+  amount: string;
+}
+
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('')
@@ -28,14 +36,29 @@ export function Register() {
     setTransactionType(type)
   }
 
-  function handleOpenSelectCategoryModal(){
+  function handleOpenSelectCategoryModal() {
     setCategoryModalOpen(true)
   }
-  
+
   function handleCloseSelectCategoryModal() {
     setCategoryModalOpen(false);
   }
 
+  function handleRegister(form: FormData) {
+    const data = {
+      name: form.name,
+      amount: form.amount,
+      transactionType,
+      category: category.key
+    }
+
+    console.log(data)
+  }
+
+  const {
+    control,
+    handleSubmit
+  } = useForm()
 
   return (
     <Container>
@@ -44,8 +67,16 @@ export function Register() {
       </Header>
       <Form>
         <Fields>
-          <Input placeholder='Nome' />
-          <Input placeholder='Preço' />
+          <InputForm
+            name="name"
+            placeholder='Nome'
+            control={control}
+          />
+          <InputForm
+            name="amount"
+            placeholder='Preço'
+            control={control}
+          />
           <TransactionsTypes>
             <TransactionTypeButton
               title='Income'
@@ -61,12 +92,15 @@ export function Register() {
             />
           </TransactionsTypes>
           <CategorySelectButton
-           title={category.name} 
+            title={category.name}
             onPress={handleOpenSelectCategoryModal}
           />
 
         </Fields>
-        <Button title='Enviar' />
+        <Button
+          title='Enviar'
+          onPress={handleSubmit(handleRegister)}
+        />
       </Form>
       <Modal visible={categoryModalOpen}>
         <CategorySelect
