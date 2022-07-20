@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CategorySelectButton } from '../../components/CategorySelectButton'
 import { Button } from '../../components/Forms/Button'
-import { Input } from '../../components/Forms/Input'
+import uuid from "react-native-uuid"
 import { TransactionTypeButton } from '../../components/TransactionTypeButton'
 import {
   Alert,
@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form'
 import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 
 interface FormData {
   name: string;
@@ -50,6 +51,18 @@ export function Register() {
 
   const dataKey = '@gofinance:transactions'
 
+  const navigation = useNavigation()
+
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
+
   function handleTransactionsTypeSelect(type: "up" | "down") {
     setTransactionType(type)
   }
@@ -71,10 +84,12 @@ export function Register() {
       return Alert.alert('Selecione a categoria')
 
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
 
     try {
@@ -82,33 +97,28 @@ export function Register() {
       const currentData = data ? JSON.parse(data) : []
       const dataFormatted = [
         ...currentData,
-        newTransaction 
+        newTransaction
       ]
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted))
+
+      reset()
+
+      setTransactionType('')
+
+      setCategory({
+        key: "category",
+        name: "categoria",
+      })
+
+      navigation.navigate('Listagem')
+
     }
     catch (e) {
       console.log(e)
       Alert.alert("Não foi possível salvar")
     }
   }
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({
-    resolver: yupResolver(schema)
-  })
-
-  useEffect(() => {
-    async function loadData() {
-      const data = await AsyncStorage.getItem(dataKey)
-      console.log(data)
-    }
-
-    loadData()
-  }, [])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
