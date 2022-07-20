@@ -56,6 +56,9 @@ font-size: ${RFValue(18)}px;
 font-family: ${({ theme }) => theme.fonts.bold};
 `
 
+export const LogoutButton = styled.TouchableOpacity`
+`
+
 export const Icon = styled(Feather)`
 color: ${({ theme }) => theme.colors.secondary};
 font-size: ${RFValue(24)}px`
@@ -86,8 +89,8 @@ margin-bottom: 16px;
 
 `
 export const TransactionList = styled(
-  FlatList as new () =>FlatList<DataListProps>
-  ).attrs(
+  FlatList as new () => FlatList<DataListProps>
+).attrs(
   {
     showsVerticalScrollIndicator: false,
     contentContainerStyle: {
@@ -95,3 +98,4 @@ export const TransactionList = styled(
     }
   }
 )``
+

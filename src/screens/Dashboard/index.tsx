@@ -1,16 +1,33 @@
 import React from "react";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { HighLightCard } from "../../components/HilightCard";
 import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
-import { Icon, Transactions, Title, Container, HighLightCards, Header, UserWrapper, UserInfo, Photo, User, UserGreeting, UserName, TransactionList } from "./styles"
+import {
+  Icon,
+  Transactions,
+  Title,
+  Container,
+  HighLightCards,
+  Header,
+  UserWrapper,
+  UserInfo,
+  Photo,
+  User,
+  UserGreeting,
+  UserName,
+  TransactionList,
+  LogoutButton
+
+} from "./styles"
 
 
-export interface DataListProps extends TransactionCardProps{
-  id:string;
+export interface DataListProps extends TransactionCardProps {
+  id: string;
 }
 
 
 export function Dashboard() {
-  const data:DataListProps[] = [{
+  const data: DataListProps[] = [{
     id: '1',
     type: "positive",
     title: "Desenvolvimento de site",
@@ -59,7 +76,12 @@ export function Dashboard() {
               <UserName>Lucas</UserName>
             </User>
           </UserInfo>
-          <Icon name="power" />
+          <BorderlessButton>
+            <LogoutButton onPress={() => { }}>
+              <Icon name="power" />
+            </LogoutButton>
+          </BorderlessButton>
+
         </UserWrapper>
 
       </Header>

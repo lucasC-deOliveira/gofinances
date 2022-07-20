@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacityProps } from "react-native"
+import { RectButton } from "react-native-gesture-handler";
 import {
   Container,
   Icon,
@@ -25,14 +26,20 @@ export function TransactionTypeButton({
   ...rest
 }: Props) {
   return (
+
     <Container isActive={isActive} type={type} {...rest}>
-      <Icon
-        name={icons[type]}
-        type={type}
-      />
-      <Title>
-        {title}
-      </Title>
+     
+        <Icon
+          name={icons[type]}
+          type={type}
+        />
+         <RectButton/>
+          
+        <Title>
+          {title}
+        </Title>
+   
     </Container>
+
   )
 }
