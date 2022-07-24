@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
 import { set } from "react-hook-form";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { HighLightCard } from "../../components/HilightCard";
@@ -40,27 +41,27 @@ export function Dashboard() {
     const transactions = response ? JSON.parse(response) : []
 
     const transactionsFormatted:
-     DataListProps[] = transactions.map((item: DataListProps) => {
-      const amount = Number(item.amount).toLocaleString("pt-BR", {
-        style: 'currency',
-        currency: "BRL"
+      DataListProps[] = transactions.map((item: DataListProps) => {
+        const amount = Number(item.amount).toLocaleString("pt-BR", {
+          style: 'currency',
+          currency: "BRL"
+        })
+
+        const date = Intl.DateTimeFormat('pt-BR', {
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit"
+        }).format(new Date(item.date))
+
+        return {
+          id: item.id,
+          name: item.name,
+          amount,
+          type: item.type,
+          category: item.category,
+          date
+        }
       })
-
-      const date = Intl.DateTimeFormat('pt-BR', {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit"
-      }).format(new Date(item.date))
-
-      return {
-        id: item.id,
-        name: item.name,
-        amount,
-        type: item.type,
-        category: item.category,
-        date
-      }
-    })
 
     setData(transactionsFormatted)
 
@@ -69,6 +70,10 @@ export function Dashboard() {
   useEffect(() => {
     loadTransactions()
   }, [])
+
+  useFocusEffect(useCallback(() => {
+    loadTransactions()
+  }, []))
 
   return (
     <Container>
