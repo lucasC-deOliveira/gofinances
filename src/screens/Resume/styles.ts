@@ -42,7 +42,7 @@ align-items: center;
 margin-top:24px;
 `
 
-export const MonthSelectButton = styled(BorderlessButton)`
+export const MonthSelectButton = styled.TouchableOpacity`
 `
 
 export const MonthSelectIcon = styled(Feather)`
