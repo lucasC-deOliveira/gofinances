@@ -20,6 +20,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { AppRoutes } from './src/routes/app.routes';
 import { StatusBar } from 'react-native';
 import { SignIn } from './src/screens/SignIn';
+import { AuthContext } from './src/AuthContext';
 
 
 export default function App() {
@@ -35,8 +36,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <StatusBar barStyle="light-content"/>
-        <SignIn/>
+        <StatusBar barStyle="light-content" />
+        <AuthContext.Provider value={[]}>
+          <SignIn />
+        </AuthContext.Provider >
       </NavigationContainer>
     </ThemeProvider>
   )
