@@ -26,6 +26,7 @@ import {
   LogoutButton
 
 } from "./styles"
+import { useAuth } from "../../hooks/Auth";
 
 
 export interface DataListProps extends TransactionCardProps {
@@ -54,7 +55,7 @@ function getLastTransactionDate(
       .filter((transaction) => transaction.type === type)
       .map((transaction) => new Date(transaction.date).getTime())
   ))
-  return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR',{month:'long'})}`
+  return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long' })}`
 }
 
 export function Dashboard() {
@@ -63,6 +64,8 @@ export function Dashboard() {
   const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData)
 
   const [isLoading, setIsLoading] = useState(true)
+
+  const { signOut, user } = useAuth()
 
   const theme = useTheme()
 
@@ -139,7 +142,7 @@ export function Dashboard() {
           style: 'currency',
           currency: "BRL"
         }),
-        lastTransaction:totalInterval
+        lastTransaction: totalInterval
       }
     })
 
@@ -167,14 +170,14 @@ export function Dashboard() {
             <Header>
               <UserWrapper>
                 <UserInfo>
-                  <Photo source={{ uri: "https://github.com/lucasC-deOliveira.png" }} />
+                  <Photo source={{ uri: user?.photo }} />
                   <User>
                     <UserGreeting>Ola,</UserGreeting>
-                    <UserName>Lucas</UserName>
+                    <UserName>{user.name}</UserName>
                   </User>
                 </UserInfo>
                 <BorderlessButton>
-                  <LogoutButton onPress={() => { }}>
+                  <LogoutButton onPress={signOut}>
                     <Icon name="power" />
                   </LogoutButton>
                 </BorderlessButton>
@@ -186,7 +189,7 @@ export function Dashboard() {
               <HighLightCard
                 title="Entradas"
                 amount={highlightData?.entries?.amount}
-                lastTransaction= {highlightData.entries.lastTransaction}
+                lastTransaction={highlightData.entries.lastTransaction}
                 type="up"
               />
               <HighLightCard

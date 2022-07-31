@@ -20,7 +20,7 @@ import { Routes } from "./src/routes"
 import { AppRoutes } from './src/routes/app.routes';
 import { StatusBar } from 'react-native';
 import { SignIn } from './src/screens/SignIn';
-import { AuthProvider } from './src/hooks/Auth';
+import { AuthProvider, useAuth } from './src/hooks/Auth';
 
 
 
@@ -31,7 +31,9 @@ export default function App() {
     Poppins_700Bold
   })
 
-  if (!fontsLoaded) {
+  const { userStorageLoading } = useAuth()
+
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />
   }
   return (
