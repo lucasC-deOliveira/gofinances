@@ -21,9 +21,11 @@ import { useAuth } from "../../hooks/Auth"
 
 export function SignIn() {
 
-  const data = useAuth()
+  const {signInWithGoogle}= useAuth()
 
-  console.log(data.user)
+  async function handleSignInWithGoogle() {
+    await signInWithGoogle()
+  }
 
   return (
     <Container>
@@ -49,6 +51,7 @@ export function SignIn() {
           <SignInSocialButton
             title="Entrar com o google"
             svg={GoogleSvg}
+            onPress={handleSignInWithGoogle}
           />
 
           <SignInSocialButton
