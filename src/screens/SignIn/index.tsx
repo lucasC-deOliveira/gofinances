@@ -35,10 +35,9 @@ export function SignIn() {
     } catch (error) {
       console.log(error)
       Alert.alert("Não foi possivel conectar a conta Google")
-    }
-    finally {
       setIsLoading(false)
     }
+  
   }
 
   async function handleSignInWithApple() {
@@ -48,9 +47,8 @@ export function SignIn() {
     } catch (error) {
       console.log(error)
       Alert.alert("Não foi possivel conectar a conta Apple")
-    } finally {
       setIsLoading(false)
-    }
+    } 
   }
 
   return (
